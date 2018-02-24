@@ -1,0 +1,4 @@
+dependencies {
+    compile project(':WebBack.Persistence.Model')
+    compile project(':WebBack.Domain')
+}

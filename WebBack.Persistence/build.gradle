@@ -1,0 +1,5 @@
+dependencies {
+    compile project(':WebBack.Persistence.Model')
+    compile project(':WebBack.Domain')
+    compile project(':WebBack.Persistence.Mapper')
+}

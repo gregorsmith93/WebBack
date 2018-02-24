@@ -1,0 +1,74 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    
+    dependencies {
+        classpath "org.akhikhl.gretty:gretty:2.0.0"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'org.akhikhl.gretty'
+
+// JDK 8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+        mavenCentral()
+        mavenLocal()
+        jcenter()
+    }
+    
+war {
+    baseName = 'web-back'
+    version = '0.0.1'
+    webAppDirName = 'WebBack.Controller/src/main/webapp'
+}
+
+dependencies {
+    compile project(':WebBack.Controller')
+    
+    compile group: 'org.glassfish.jersey.core', name: 'jersey-server', version: '2.25'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    apply plugin: 'war'
+    
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        jcenter()
+    }
+
+    dependencies {
+        
+        compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.10.0'
+        compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.10.0'
+        compile group: 'org.springframework', name: 'spring-core', version: '5.0.4.RELEASE'
+        compile group: 'org.springframework', name: 'spring-beans', version: '5.0.4.RELEASE'
+        compile group: 'org.springframework', name: 'spring-context', version: '5.0.4.RELEASE'
+        compile group: 'org.springframework', name: 'spring-web', version: '5.0.4.RELEASE'
+        
+        compile 'org.glassfish.jersey.ext:jersey-spring3:2.19'
+        compile 'org.springframework:spring-web:4.1.7.RELEASE'
+        
+        testCompile 'junit:junit:4.12'
+        testCompile 'org.powermock:powermock-module-junit4:1.7.3'
+        testCompile 'org.powermock:powermock-module-junit4-rule:1.7.3' 
+        testCompile 'org.powermock:powermock-api-mockito2:1.7.3'
+        testCompile 'org.powermock:powermock-classloading-xstream:1.7.3' 
+        testCompile 'org.mockito:mockito-core:2.7.22'              
+        
+    }
+    
+    test {
+    
+        testLogging.showStandardStreams = true
+    }
+}

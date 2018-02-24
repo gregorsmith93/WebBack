@@ -1,0 +1,15 @@
+apply plugin: 'org.akhikhl.gretty'
+
+dependencies {
+
+    compile project(':WebBack.Controller.Model')
+    compile project(':WebBack.Domain')
+    compile project(':WebBack.Controller.Mapper')
+    compile project(':WebBack.Service')
+    
+    compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.25'
+    compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.25'
+    compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
+    compile group: 'org.glassfish.jersey.core', name: 'jersey-server', version: '2.25'
+    
+}
