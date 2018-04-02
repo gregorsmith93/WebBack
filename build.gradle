@@ -25,8 +25,12 @@ repositories {
     
 war {
     baseName = 'web-back'
-    version = '0.0.1'
     webAppDirName = 'WebBack.Controller/src/main/webapp'
+    
+    manifest {
+        attributes 'Implementation-Title': 'web-back',
+                   'Implementation-Version': '0.0.1'
+    }
 }
 
 dependencies {
@@ -50,20 +54,38 @@ subprojects {
         
         compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.10.0'
         compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.10.0'
+        compile group: 'org.apache.logging.log4j', name: 'log4j-web', version: '2.10.0'
+        
         compile group: 'org.springframework', name: 'spring-core', version: '5.0.4.RELEASE'
         compile group: 'org.springframework', name: 'spring-beans', version: '5.0.4.RELEASE'
         compile group: 'org.springframework', name: 'spring-context', version: '5.0.4.RELEASE'
         compile group: 'org.springframework', name: 'spring-web', version: '5.0.4.RELEASE'
         
-        compile 'org.glassfish.jersey.ext:jersey-spring3:2.19'
-        compile 'org.springframework:spring-web:4.1.7.RELEASE'
+        compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.0.5.RELEASE'
+        compile group: 'org.springframework.data', name: 'spring-data-rest-core', version: '3.0.5.RELEASE'
+        
+        compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+        
+        compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.0.Final'        
+
+        compile group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
+        compile group: 'javax.enterprise', name: 'cdi-api', version: '2.0'
+    
+        compile('org.glassfish.jersey.ext:jersey-spring3:2.19') {
+            exclude group: 'org.glassfish.hk2.external', module: 'bean-validator'
+            exclude group: 'org.glassfish.jersey.ext', module: 'jersey-bean-validation'
+        }
         
         testCompile 'junit:junit:4.12'
         testCompile 'org.powermock:powermock-module-junit4:1.7.3'
         testCompile 'org.powermock:powermock-module-junit4-rule:1.7.3' 
         testCompile 'org.powermock:powermock-api-mockito2:1.7.3'
         testCompile 'org.powermock:powermock-classloading-xstream:1.7.3' 
-        testCompile 'org.mockito:mockito-core:2.7.22'              
+        testCompile 'org.mockito:mockito-core:2.7.22'
+        testCompile group: 'org.springframework', name: 'spring-test', version: '5.0.4.RELEASE'
+        testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+        
+             
         
     }
     
@@ -72,3 +94,12 @@ subprojects {
         testLogging.showStandardStreams = true
     }
 }
+
+task redeploy(type:Exec){
+    doFirst {
+        println "Starting redeployment of ${war.baseName}..."
+        commandLine = ['cmd', '/C', 'redeploy.bat']
+    }
+}
+
+redeploy.dependsOn(subprojects.build)

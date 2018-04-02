@@ -9,6 +9,6 @@ import com.webback.domain.Home;
 public interface HomeControllerMapper {
 
 	HomeControllerModel map(Home home);
-	
+
 	Home map(HomeControllerModel homeControllerModel);
 }

@@ -2,4 +2,7 @@ dependencies {
     compile project(':WebBack.Persistence.Model')
     compile project(':WebBack.Domain')
     compile project(':WebBack.Persistence.Mapper')
+    
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '5.0.4.RELEASE'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
 }

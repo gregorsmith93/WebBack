@@ -1,4 +1,4 @@
-package com.webback.persistence;
+package com.webback.persistence.service;
 
 import org.springframework.stereotype.Component;
 

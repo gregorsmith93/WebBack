@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Configuration status="INFO">
+<Appenders>
+    <RollingFile name="MyFile">
+      <FilePattern>../../../WebLogs/WebBack-%d{yyyy-MM-dd}.log</FilePattern>
+      <PatternLayout>
+        <Pattern>%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+      </Policies>
+    </RollingFile>
+    </Appenders>
+    
+    <Loggers>
+        <Logger name="com.webback.controller" level="debug" additivity="false">
+            <AppenderRef ref="MyFile"/>
+        </Logger>
+        <Logger name="com.webback.service" level="debug" additivity="false">
+            <AppenderRef ref="MyFile"/>
+        </Logger>
+        <Logger name="com.webback.persistence" level="debug" additivity="false">
+            <AppenderRef ref="MyFile"/>
+        </Logger>
+        <Logger name="org.springframework.*" level="info" additivity="false">
+            <AppenderRef ref="MyFile"/>
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="MyFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
